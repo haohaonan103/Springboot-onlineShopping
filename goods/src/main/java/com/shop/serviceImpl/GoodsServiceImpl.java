@@ -7,10 +7,11 @@ import com.shop.model.User;
 import com.shop.service.GoodsService;
 import com.shop.vo.GoodsVo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-
+@Service
 public class GoodsServiceImpl implements GoodsService {
     @Autowired
     private GoodsMapper goodsMapper;

@@ -15,6 +15,7 @@
         <module>goods</module>
         <module>order</module>
         <module>info</module>
+        <module>controller</module>
     </modules>
 
     <dependencyManagement>
