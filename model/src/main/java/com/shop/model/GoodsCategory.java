@@ -5,7 +5,7 @@ import lombok.Data;
 import lombok.ToString;
 
 /**
- * 商品类别表
+ * 商品类别实体类
  */
 @Data
 @Builder

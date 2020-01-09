@@ -5,7 +5,7 @@ import lombok.Data;
 import lombok.ToString;
 
 /**
- * 商品表
+ * 商品实体类
  */
 @Data
 @Builder
@@ -19,9 +19,9 @@ public class Goods {
     private Double goodsPrice;
     // goodsPic  商品图片url
     private String goodsPic;
-    // goodsStatus
+    // goodsStatus 商品状态
     private Integer goodsStatus;
-    // goodsCount
+    // goodsCount 商品库存
     private int goodsCount;
 
 
