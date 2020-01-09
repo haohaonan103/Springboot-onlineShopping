@@ -33,6 +33,8 @@ public class OrderServiceImp implements OrderService {
     private double count;
     //折后订单金额
     private double count2;
+    //购买后的库存
+    private int amount;
 
     /**
      * 添加到order
@@ -57,16 +59,18 @@ public class OrderServiceImp implements OrderService {
             String format = simpleDateFormat.format(date);
             HttpSession session = request.getSession();
             User user = (User)session.getAttribute("user");
-
+            //获取修改后的数量
+            amount= (int) ((byId.getGoodsCount())-(order.getGoodsNum()));
+            //调用修改方法
+            goodsMapper.updateGoods(amount,order.getGoodsId());
             //给order对象赋值
             order.setUserId(user.getUserId());
             order.setOrderTotal(count);
             order.setOrderTotalActual(count2);
             order.setOrderTime(format);
 
-
             boolean b = orderMapper.putOrder(order);
-            return true;
+            return b;
         }else {
             return false;
         }

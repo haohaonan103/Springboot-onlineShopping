@@ -5,6 +5,7 @@ import com.shop.vo.GoodsVo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
 
 import java.security.Key;
@@ -47,5 +48,13 @@ public interface GoodsMapper {
     @Select("SELECT * from goods g inner JOIN goods_category gc " +
             "on g.goodsCateId=gc.categoryId and g.goodsId = #{id}")
     public GoodsVo getById(Long goodsId);
+
+    /**
+     * 修改商品库存
+     * @param amount
+     * @return
+     */
+    @Update("update goods set goodsCount=#{amount} where goodsId=#{goodsId}")
+    public Integer updateGoods(int amount,Long goodsId);
 
 }
