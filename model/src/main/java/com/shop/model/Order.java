@@ -17,10 +17,16 @@ public class Order {
     private Long orderId;
     // userId
     private Long userId;
+    //商品id
+    private Long goodsId;
+    //商品数量
+    public Long GoodsNum;
+    //优惠券id
+    private Long couponId;
     // orderTotal--总金额
     private Double orderTotal;
     // orderTotalActual--实际总金额
     private Double orderTotalActual;
     // orderTime--购买时间
-    private Date orderTime;
+    private String orderTime;
 }
