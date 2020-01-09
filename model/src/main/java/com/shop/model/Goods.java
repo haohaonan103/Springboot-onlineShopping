@@ -2,6 +2,7 @@ package com.shop.model;
 
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 /**
@@ -10,6 +11,7 @@ import lombok.ToString;
 @Data
 @Builder
 @ToString
+@NoArgsConstructor
 public class Goods {
     //goodsId 商品id
     private Long goodsId;
