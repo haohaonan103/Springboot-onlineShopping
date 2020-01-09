@@ -9,7 +9,6 @@ import lombok.ToString;
  * 商品实体类
  */
 @Data
-@Builder
 @ToString
 @NoArgsConstructor
 public class Goods {

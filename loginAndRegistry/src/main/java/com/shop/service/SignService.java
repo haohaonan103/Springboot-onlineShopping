@@ -18,5 +18,5 @@ public interface SignService {
      * @param user
      * @return
      */
-    public Integer putuser(User user);
+
 }

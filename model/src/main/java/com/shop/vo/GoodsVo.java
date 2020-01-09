@@ -4,7 +4,6 @@ import com.shop.model.Goods;
 import lombok.*;
 
 @Data
-@Builder
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor

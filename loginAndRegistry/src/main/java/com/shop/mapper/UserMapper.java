@@ -15,4 +15,6 @@ public interface UserMapper {
      */
     @Select("select * from user where userName=#{userName} and userPassword=#{userPassword}")
     public User loginselect(User user);
+    @Select("select * from user where userId = #{userId}")
+    User getById(Long userId);
 }

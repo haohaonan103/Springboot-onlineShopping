@@ -1,21 +1,37 @@
 package com.shop.controller;
 
+import com.shop.model.User;
 import com.shop.service.GoodsService;
+import com.shop.service.LoginService;
+import com.shop.service.SignService;
 import com.shop.vo.GoodsVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @RestController
 public class GoodsController {
     @Autowired
     private GoodsService goodsService;
+    @Autowired
+    private LoginService loginService;
+    @Autowired
+    private SignService signService;
 
     @GetMapping("/allGoods")
-    public List<GoodsVo> getAllGoods(){
-        return goodsService.listAllGoods();
+    public Object getAllGoods(HttpServletRequest request){
+        User user = new User();
+        user.setUserName("test");
+        user.setUserPassword("test");
+        return loginService.loginselect(user,request);
+    }
+    @GetMapping("/{id}")
+    public GoodsVo getById(@PathVariable Long id){
+        return goodsService.getById(id);
     }
 
 }

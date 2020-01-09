@@ -11,7 +11,6 @@ import java.util.List;
  * user用户实体类
  */
 @Data
-@Builder
 @ToString
 public class User {
     //用户id

@@ -68,7 +68,7 @@ public class GoodsServiceImpl implements GoodsService {
     @Override
     public List<GoodsVo> getLike(String key) {
         List<GoodsVo> like = goodsMapper.getLike(key);
-        return null;
+        return like;
     }
 
 
