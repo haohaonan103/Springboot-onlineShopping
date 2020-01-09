@@ -2,6 +2,7 @@ package com.shop.controller;
 
 import com.shop.model.User;
 import com.shop.service.GoodsService;
+import com.shop.service.InfoService;
 import com.shop.service.LoginService;
 import com.shop.service.SignService;
 import com.shop.vo.GoodsVo;
@@ -21,13 +22,13 @@ public class GoodsController {
     private LoginService loginService;
     @Autowired
     private SignService signService;
+    @Autowired
+    private InfoService infoService;
 
     @GetMapping("/allGoods")
     public Object getAllGoods(HttpServletRequest request){
-        User user = new User();
-        user.setUserName("test");
-        user.setUserPassword("test");
-        return loginService.loginselect(user,request);
+
+        return null;
     }
     @GetMapping("/{id}")
     public GoodsVo getById(@PathVariable Long id){
