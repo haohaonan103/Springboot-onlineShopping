@@ -2,10 +2,7 @@ package com.shop.mapper;
 
 import com.shop.model.Goods;
 import com.shop.vo.GoodsVo;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
 import java.security.Key;
@@ -62,5 +59,14 @@ public interface GoodsMapper {
      * @param goods
      * @return
      */
+    @Insert("insert into goods(goodsName,goodsPrice,goodsPic,goodsStatic,goodsCateId,goodsCount) value(#{goodsName},#{goodsPrice},#{goodsPic},#{goodsStatic},#{goodsCateId},#{goodsCount})")
     public Integer putGoods(Goods goods);
+
+    /**
+     * 删除商品
+     * @param id
+     * @return
+     */
+    @Delete("delete from goods where id=#{id}")
+    public Integer deleteGoods(Long id);
 }

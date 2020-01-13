@@ -50,4 +50,11 @@ public interface GoodsService {
      * @return
      */
     public Integer putGoods(Goods goods);
+
+    /**
+     * 商品删除
+     * @param id
+     * @return
+     */
+    public Integer deleteGoods(Long id);
 }

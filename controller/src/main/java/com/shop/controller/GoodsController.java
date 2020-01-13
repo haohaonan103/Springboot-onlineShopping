@@ -1,5 +1,6 @@
 package com.shop.controller;
 
+import com.shop.model.Goods;
 import com.shop.service.GoodsService;
 import com.shop.vo.GoodsVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +33,29 @@ public class GoodsController {
      * @return
      */
     @GetMapping("/{id}")
-        public GoodsVo getById(@PathVariable Long id){
+    public GoodsVo getById(@PathVariable("id") Long id){
         return goodsService.getById(id);
         }
+
+    /**
+     * 商品新增
+     * @param goods
+     * @return
+     */
+    @GetMapping("/insert")
+    public Integer insertGoods(Goods goods){
+         Integer integer = goodsService.putGoods(goods);
+         return integer;
+     }
+
+    /**
+     * 商品删除
+     * @param id
+     * @return
+     */
+     @GetMapping("/delete")
+     public Integer deleteGoods(Long id){
+         Integer integer = goodsService.deleteGoods(id);
+         return integer;
+     }
 }

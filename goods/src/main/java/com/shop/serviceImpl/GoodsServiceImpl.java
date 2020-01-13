@@ -93,4 +93,15 @@ public class GoodsServiceImpl implements GoodsService {
         Integer integer = goodsMapper.putGoods(goods);
         return integer;
     }
+
+    /**
+     * 商品删除
+     * @param id
+     * @return
+     */
+    @Override
+    public Integer deleteGoods(Long id) {
+        Integer integer = goodsMapper.deleteGoods(id);
+        return integer;
+    }
 }

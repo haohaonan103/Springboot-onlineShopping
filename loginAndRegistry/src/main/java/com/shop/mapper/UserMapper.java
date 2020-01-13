@@ -15,7 +15,7 @@ public interface UserMapper {
      * 登录校验查询user
      * @return
      */
-    @Select("select * from user where userName=#{userName} and userPassword=#{userPassword}")
+    @Select("select * from user where userName=#{userName} and userPasswore=#{userPassword}")
     public User loginselect(User user);
     @Select("select * from user where userId = #{userId}")
     User getById(Long userId);
