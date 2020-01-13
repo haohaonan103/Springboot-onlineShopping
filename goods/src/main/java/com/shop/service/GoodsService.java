@@ -44,4 +44,10 @@ public interface GoodsService {
      * @return
      */
     public GoodsVo getById(Long goodsId);
+    /**
+     * 商品新增
+     * @param goods
+     * @return
+     */
+    public Integer putGoods(Goods goods);
 }

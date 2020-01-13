@@ -82,4 +82,15 @@ public class GoodsServiceImpl implements GoodsService {
         GoodsVo goodsVo = goodsMapper.getById(goodsId);
         return goodsVo;
     }
+
+    /**
+     * 商品新增
+     * @param goods
+     * @return
+     */
+    @Override
+    public Integer putGoods(Goods goods) {
+        Integer integer = goodsMapper.putGoods(goods);
+        return integer;
+    }
 }

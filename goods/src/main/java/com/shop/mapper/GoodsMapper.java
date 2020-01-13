@@ -57,4 +57,10 @@ public interface GoodsMapper {
     @Update("update goods set goodsCount=#{amount} where goodsId=#{goodsId}")
     public Integer updateGoods(int amount,Long goodsId);
 
+    /**
+     * 商品新增
+     * @param goods
+     * @return
+     */
+    public Integer putGoods(Goods goods);
 }
