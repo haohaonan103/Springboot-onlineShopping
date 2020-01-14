@@ -11,6 +11,7 @@ import com.shop.service.OrderService;
 import com.shop.vo.GoodsVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -42,6 +43,7 @@ public class OrderServiceImp implements OrderService {
      * @return
      */
     @Override
+    @Transactional
     public boolean createOrder(Order order, HttpServletRequest request) {
 
         //先判断买的库存的数量是否大于购买数量

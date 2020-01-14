@@ -52,7 +52,7 @@ public class Goods {
     }
 
     public void setGoodsPic(String goodsPic) {
-        this.goodsPic ="uploads/"+goodsPic;
+        this.goodsPic =goodsPic;
     }
 
     public Integer getGoodsStatus() {

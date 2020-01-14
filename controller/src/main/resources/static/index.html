@@ -1,4 +1,4 @@
-<html lang="en" xmlns:v="http://www.w3.org/1999/xhtml">
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -120,7 +120,7 @@
                 v-for="hot in hots">
                     <div class="single-grid">
                         <div class="grid-img">
-                            <img class="img-resposive" :src="hot.goodsPic" :alt=hot.categoryName />
+                            <img style="width: 255px;height: 275px" class="img-resposive" :src=hot.goodsPic :alt=hot.categoryName />
                             <div class="grid-overlay">
                                 <ul>
                                     <li style="width: 100px"><a @click="javascript:buy(hot.goodsId);" class="lnr lnr-cart">BUY</a></li>
@@ -150,13 +150,13 @@
 
 <!--======== All Javascript =========-->
 <script src="js/jquery-2.1.1.js"></script>
-<script src="js/axios.js"></script>
 <script src="bootstrap/js/bootstrap.min.js"></script>
 <script src="js/vue.js"></script>
+<script src="js/axios.js"></script>
 <script src="js/index.js"></script>
 
 <script>
-    var vue = new Vue({
+    let vue = new Vue({
         el:"#hot",
         data:{
            coupons:[],
@@ -174,13 +174,12 @@
             },
             getHots:function () {
                 axios.get("goods/get4").then(res=>this.hots=res.data);
-                console.log(res.data);
             },
             getCurrUser:function () {
-                axios.get("user/getCurrUser").then(res=>{
-                    if(res.data!=""){
-                        this.user=res.data;
-                        $("#welcome").html("您好,"+res.data.userName);
+                axios.get("user/getCurrUser").then(cc=>{
+                    if(cc.data!=""){
+                        this.user=cc.data;
+                        $("#welcome").html("您好,"+cc.data.userName);
                     }
                 });
             },

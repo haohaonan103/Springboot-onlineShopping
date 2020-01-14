@@ -9,7 +9,7 @@ import java.util.UUID;
 
 public class FileUtils {
     public static boolean upload(MultipartFile file, String fileName, HttpServletRequest request){
-        String realPath = request.getServletContext().getRealPath("/static/");
+        String realPath = request.getServletContext().getRealPath("/");
         File file1 = new File(realPath+"/"+fileName);
         if(!file1.getParentFile().exists()){
             //创建 :多级目录

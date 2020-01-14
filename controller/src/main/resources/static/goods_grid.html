@@ -176,7 +176,7 @@
                         v-for="goods in goodses">
                             <div class="single-grid">
                                 <div class="grid-img">
-                                    <img class="img-resposive" :src="goods.goodsPic" alt="women" />
+                                    <img style="width: 255px;height: 275px" class="img-resposive" :src="goods.goodsPic" :alt="goods.categoryName" />
                                     <div class="grid-overlay">
                                         <ul>
                                             <li style="width: 100px"><a @click="javascript:buy(goods.goodsId);" class="lnr lnr-cart">BUY</a></li>

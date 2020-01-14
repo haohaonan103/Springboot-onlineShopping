@@ -10,7 +10,6 @@ import java.util.Date;
  * 订单实体类
  */
 @Data
-@Builder
 @ToString
 public class Order {
     //orderId
