@@ -10,6 +10,7 @@
     <link href="css/linearicons.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
     <link href="css/responsive.css" rel="stylesheet">
+    <link href="js/index.css" rel="stylesheet">
 </head>
 
 <body>
@@ -123,6 +124,29 @@
 
                             <!-- 类别 -->
                             <div class="panel-body">
+                                <button @click="addCate">添加类别</button>
+                                <el-dialog
+                                        title="添加类别"
+                                        :visible.sync="catevs"
+                                        width="30%">
+                                    <div>
+
+                                    </div>
+                                    <span slot="footer" class="dialog-footer">
+                <el-button @click="catevs = false">取 消</el-button>
+                <el-button type="primary" @click="addCate">确 定</el-button>
+              </span>
+                                </el-dialog>
+                                <button @click="addGoods">添加商品</button>
+                                <el-dialog
+                                        title="添加商品"
+                                        :visible.sync="goodsvs"
+                                        width="30%">
+                                    <span slot="footer" class="dialog-footer">
+                <el-button @click="goodsvs = false">取 消</el-button>
+                <el-button type="primary" @click="addCate">确 定</el-button>
+              </span>
+                                </el-dialog>
                                 <ul class="category-list">
                                     <li v-for="cate in cates" @click="javascript:changeCates(cate.categoryId);"><i class="fa fa-eye side-icon pull-left active"></i>{{cate.categoryName}}<i class="fa fa-angle-right pull-right"></i></li>
                                 </ul>
@@ -178,6 +202,7 @@
 <script src="bootstrap/js/bootstrap.min.js"></script>
 <script src="js/vue.js"></script>
 <script src="js/axios.js"></script>
+<script src="js/index.js"></script>
 
 <script>
     var v1 = new Vue({
@@ -186,8 +211,17 @@
             cates:[],
             goodses:[],
             user:{},
+            catevs:false,
+            goodsvs:false
+
         },
         methods:{
+            addCate:function(){
+                this.catevs=true;
+            },
+            addGoods:function(){
+                this.goodsvs=true;
+            },
             search:function(){
                 var key = $("#searchKey").val();
                axios.get("goods/like/"+key).then(res=>{this.goodses=res.data});
