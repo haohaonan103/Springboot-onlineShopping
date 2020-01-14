@@ -10,13 +10,7 @@ import java.util.List;
  * 商品页面接口
  */
 public interface GoodsService {
-    /**
-     * 领取优惠券
-     * @param user 用户对象
-     * @param couponId  优惠券id
-     * @return true/false
-     */
-    public boolean getCoupon(User user,Long couponId);
+
 
     /**
      * 查询所有商品信息
@@ -57,4 +51,5 @@ public interface GoodsService {
      * @return
      */
     public Integer deleteGoods(Long id);
+    public List<GoodsVo> get4();
 }

@@ -24,8 +24,8 @@
                 </div>
                 <div class="col-md-6 col-xs-5">
                     <ul class="list-inline security">
-                        <li title="Login"><i class=" lnr lnr-lock"></i><span class="hidden-xs">Login</span></li>
-                        <li title="Register"><i class=" lnr lnr-pencil"></i><span class="hidden-xs">Register</span></li>
+                        <li title="Login" id="welcome"><i class=" lnr lnr-lock"></i><span class="hidden-xs">Login</span></li>
+
                     </ul>
                 </div>
             </div>
@@ -61,13 +61,7 @@
                                     </ul>
                                 </li>
                             </ul>
-                            <div class="nav-search">
-                                <form class="navbar-form navbar-right" role="search">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="Search..."><i class="fa fa-search search-btn"></i>
-                                    </div>
-                                </form>
-                            </div>
+
                         </div>
                     </div>
                 </nav>
@@ -107,7 +101,7 @@
         </div>
     </div>
 </section>
-
+<div id="app">
 <!-- Product -->
 <section class="single-product">
     <div class="container">
@@ -119,31 +113,21 @@
             </div>
             <div class="col-md-6 col-sm-6 col-xs-12">
                 <div class="single-product-detail">
-                    <div class="btn-group" role="group">
-                        <button type="button" class="btn btn-default active"> <i class="fa fa-circle"></i> in Stock</button>
-                        <button type="button" class="btn btn-default"> 37 - in Stock</button>
-                    </div>
-                    <h3>BuyMore Template Is Fully Responsive & Eye-Catching</h3>
-                    <ul class="list-inline">
-                        <li><i class="lnr lnr-star"></i></li>
-                        <li><i class="lnr lnr-star"></i></li>
-                        <li><i class="lnr lnr-star"></i></li>
-                        <li><i class="lnr lnr-star"></i></li>
-                        <li><i class="lnr lnr-star-half"></i></li>
-                        <li><span>5 - Reviews</span></li>
-                    </ul>
-                    <p>Lorem ipsum dolor sit amet, mauris ac suscipit porta. Vel sed tempore, leo dictum nec turpis nibh curabitur, ultricies nibh quam neque mauris tortor sit. Vel urna quis, neque cursus id sollicitudin ipsum, euismod a libero mi. Tellus accumsan purus diam molestias suspendisse non, tellus pede cursus inceptos leo turpis nec.</p>
 
-                    <div class="price">$287.99</div>
-                    <div class="order-tag">Tellus accumsan purus diam molestias</div>
-                    <div class="add-cart"><a class="btn btn-default" href=""
-                    ><i class="lnr lnr-cart"></i>GET IT</a></div>
+                    <h3>{{goods.goodsName}}</h3>
+
+                    <p v-for="coupon in coupons">优惠券</p>
+
+                    <div class="price">￥{{goods.goodsPrice}}</div>
+                    <div class="order-tag">{{goods.categoryName}}</div>
+                    <div class="add-cart"><button class="btn btn-default">
+                        <i class="lnr lnr-cart"></i>GET IT</button></div>
                 </div>
             </div>
         </div>
     </div>
 </section>
-
+</div>
 <!-- bottom footer -->
 <footer class="bottom-footer">
     <div class="container">
@@ -158,5 +142,40 @@
 <!--======== All Javascript =========-->
 <script src="js/jquery-2.1.1.js"></script>
 <script src="bootstrap/js/bootstrap.min.js"></script>
+<script src="js/vue.js"></script>
+<script src="js/axios.js"></script>
+
+<script>
+    var v1 = new Vue({
+        el:"#app",
+        data:{
+            goods:{},
+            coupons:[]
+
+        },
+        methods:{
+            getGoods:function (id) {
+                axios.get("goods/"+id).then(res=>this.goods=res.data);
+            },
+            getCoupons:function () {
+                axios.get("/coupon/getByUser").then(res=>this.coupons=res.data);
+            },
+            getCurrUser:function () {
+                axios.get("user/getCurrUser").then(res=>{
+                    if(res.data!=""){
+                        this.user=res.data;
+                        $("#welcome").html("您好,"+res.data.userName);
+                    }
+                });
+            }
+        },
+        mounted:function () {
+            let item = window.localStorage.getItem("id");
+            this.getGoods(item);
+            this.getCoupons();
+            this.getCurrUser();
+        }
+    });
+</script>
 </body>
 </html>

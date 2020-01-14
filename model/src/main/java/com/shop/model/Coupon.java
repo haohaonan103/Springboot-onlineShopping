@@ -8,7 +8,6 @@ import lombok.ToString;
  * 优惠券实体类
  */
 @Data
-@Builder
 @ToString
 public class Coupon {
     //couponId  优惠券id

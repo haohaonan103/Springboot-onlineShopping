@@ -14,7 +14,7 @@
     <link href="css/responsive.css" rel="stylesheet">
 </head>
 
-<body>
+
 <!-- Header -->
 <header class="header">
     <div class="top-header">
@@ -26,15 +26,10 @@
                 </div>
                 <div class="col-md-6 col-xs-5">
                     <ul class="list-inline security">
-                        <li title="Login"><i class=" lnr lnr-lock"></i><span class="hidden-xs">Login</span></li>
-                        <li title="Register"><i class=" lnr lnr-pencil"></i><span class="hidden-xs">Register</span></li>
+                        <li title="Login" id="welcome"><i class=" lnr lnr-lock"></i><a href="login.html" class="hidden-xs">Login</a></li>
                     </ul>
                 </div>
             </div>
-        </div>
-    </div>
-
-
         </div>
     </div>
 
@@ -63,13 +58,7 @@
                                     </ul>
                                 </li>
                             </ul>
-                            <div class="nav-search">
-                                <form class="navbar-form navbar-right" role="search">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="Search..."><i class="fa fa-search search-btn"></i>
-                                    </div>
-                                </form>
-                            </div>
+
                         </div>
                     </div>
                 </nav>
@@ -92,48 +81,19 @@
         </div>
     </div>
 </section>
-
+<div id="hot">
 <!-- feature box -->
 <section class="feature-box">
     <div class="container">
-        <div class="row">
-            <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="col-md-3 col-sm-6 col-xs-12"
+            v-for="coupon in coupons"
+            >
                 <div class="f-s-b">
                     <div class="well well-sm">
                         <i class="lnr lnr-heart"></i>
-                        <h3>七折券</h3>
-                        <small>此券可以打七折，用完失效</small>
-                        <button>点击领取</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-6 col-xs-12">
-                <div class="f-s-b">
-                    <div class="well well-sm">
-                        <i class="lnr lnr-heart"></i>
-                        <h3>八折券</h3>
-                        <small>此券可以打八折，用完失效</small>
-                        <button>点击领取</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-6 col-xs-12">
-            <div class="f-s-b">
-                <div class="well well-sm">
-                    <i class="lnr lnr-heart"></i>
-                    <h3>九折券</h3>
-                    <small>此券可以打九折，用完失效</small>
-                    <button>点击领取</button>
-                </div>
-            </div>
-        </div>
-            <div class="col-md-3 col-sm-6 col-xs-12">
-                <div class="f-s-b">
-                    <div class="well well-sm">
-                        <i class="lnr lnr-heart"></i>
-                        <h3>八五折券</h3>
-                        <small>此券可以打八五折，用完失效</small>
-                        <button>点击领取</button>
+                        <h3>{{coupon.couponName}}</h3>
+                        <small>领取{{coupon.couponName}}，用完失效</small>
+                        <button @click="javascript:getCoupon(coupon.couponId);">点击领取</button>
                     </div>
                 </div>
             </div>
@@ -143,90 +103,38 @@
 
 
 
-<!-- vue数据填充在这里  -->
-<!-- Feature Product -->
-<section class="feature-product" id="hot">
+
+<section class="feature-product" >
     <div class="grid-product">
         <div class="container">
             <div class="row">
                 <div class="section-title col-md-offset-3 col-md-6 col-xs-12 text-center">
-                    <h2>Featured Products</h2>
-                    <small>Check Out The Best Offer To Stay Trend</small>
+                    <h2>热卖  HOT</h2>
+                    <small>优选精品</small>
                     <div class="section-border"><span class="dash"></span></div>
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="col-md-3 col-sm-6 col-xs-12"
+                v-for="hot in hots">
                     <div class="single-grid">
                         <div class="grid-img">
-                            <img class="img-resposive" src="images/women1.jpg" alt="women" />
+                            <img class="img-resposive" src="images/women1.jpg" :alt=hot.categoryName />
                             <div class="grid-overlay">
                                 <ul>
-                                    <li><i class="lnr lnr-heart"></i></li>
-                                    <li><i class="lnr lnr-camera"></i></li>
-                                    <li><i class="lnr lnr-cart"></i></li>
+                                    <li style="width: 100px"><a @click="javascript:buy(hot.goodsId);" class="lnr lnr-cart">BUY</a></li>
                                 </ul>
                             </div>
                         </div>
-                        <h3>{{msg}}<span>$65</span></h3>
-                        <p>Lorem ipsum dolor sit amet</p>
-                    </div>
-                </div>
-                <div class="col-md-3 col-sm-6 col-xs-12">
-                    <div class="single-grid">
-                        <div class="grid-img">
-                            <img class="img-resposive" src="images/women2.jpg" alt="women" />
-                            <strong>25%</strong>
-                            <strong class="new">New</strong>
-                            <div class="grid-overlay">
-                                <ul>
-                                    <li><i class="lnr lnr-heart"></i></li>
-                                    <li><i class="lnr lnr-camera"></i></li>
-                                    <li><i class="lnr lnr-cart"></i></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <h3>Bright Scalet-Shirt  <span>$65</span></h3>
-                        <p>Lorem ipsum dolor sit amet</p>
-                    </div>
-                </div>
-                <div class="col-md-3 col-sm-6 col-xs-12">
-                    <div class="single-grid">
-                        <div class="grid-img">
-                            <img class="img-resposive" src="images/women3.jpg" alt="women" />
-                            <div class="grid-overlay">
-                                <ul>
-                                    <li><i class="lnr lnr-heart"></i></li>
-                                    <li><i class="lnr lnr-camera"></i></li>
-                                    <li><i class="lnr lnr-cart"></i></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <h3>Bright Scalet-Shirt  <span>$65</span></h3>
-                        <p>Lorem ipsum dolor sit amet</p>
-                    </div>
-                </div>
-                <div class="col-md-3 col-sm-6 col-xs-12">
-                    <div class="single-grid">
-                        <div class="grid-img">
-                            <img class="img-resposive" src="images/women4.jpg" alt="women" />
-                            <strong>Hot</strong>
-                            <div class="grid-overlay">
-                                <ul>
-                                    <li><i class="lnr lnr-heart"></i></li>
-                                    <li><i class="lnr lnr-camera"></i></li>
-                                    <li><i class="lnr lnr-cart"></i></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <h3>Bright Scalet-Shirt  <span>$65</span></h3>
-                        <p>Lorem ipsum dolor sit amet</p>
+                        <h3>{{hot.goodsName}}<span>{{hot.goodsPrice}}</span></h3>
+                        <p>{{hot.categoryName}}</p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
+</div>
 
 <!-- bottom footer -->
 <footer class="bottom-footer">
@@ -241,18 +149,57 @@
 
 <!--======== All Javascript =========-->
 <script src="js/jquery-2.1.1.js"></script>
+<script src="js/axios.js"></script>
 <script src="bootstrap/js/bootstrap.min.js"></script>
 <script src="js/vue.js"></script>
+<script src="js/index.js"></script>
+<link rel="stylesheet" href="js/index.css">
 
 <script>
     var vue = new Vue({
         el:"#hot",
         data:{
-            msg:123
+           coupons:[],
+            hots:[],
+            user:{},
+            coupon:{}
         },
-        method:{},
+        methods:{
+            buy:function (id) {
+                window.localStorage.setItem("id",id);
+                window.location.href="detail.html";
+            },
+            getCoupons:function () {
+                axios.get("coupon/all").then(res=>this.coupons=res.data);
+            },
+            getHots:function () {
+                axios.get("goods/get4").then(res=>this.hots=res.data);
+            },
+            getCurrUser:function () {
+                axios.get("user/getCurrUser").then(res=>{
+                    if(res.data!=""){
+                        this.user=res.data;
+                        $("#welcome").html("您好,"+res.data.userName);
+                    }
+                });
+            },
+            getCoupon:function (couponId) {
+                this.coupon.couponId = couponId;
+                axios.post("coupon/get",this.coupon).then(res=>{
+                    if(res.data){
+                        this.$message({
+                            message: '恭喜你，领取成功',
+                            type: 'success'
+                        });
+                    }else {
+                        this.$message.error('领取失败');
+                    }
+                })}
+        },
         mounted:function () {
-
+            this.getCoupons();
+            this.getHots();
+            this.getCurrUser();
         }
         });
 </script>

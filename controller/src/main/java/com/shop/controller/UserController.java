@@ -4,17 +4,13 @@ import com.shop.model.User;
 import com.shop.service.LoginService;
 import com.shop.service.SignService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 
 @RestController
 @RequestMapping("/user")
 public class UserController {
-    private HttpServletRequest request;
     @Autowired
     private LoginService loginService;
     @Autowired
@@ -25,8 +21,8 @@ public class UserController {
      * @param user
      * @return
      */
-    @PostMapping("/login")
-    public boolean loginenter(User user){
+    @RequestMapping("/login")
+    public boolean loginenter(@RequestBody User user,HttpServletRequest request){
         boolean loginselect = loginService.loginselect(user, request);
         return loginselect;
     }
@@ -36,9 +32,16 @@ public class UserController {
      * @param user
      * @return
      */
-    @GetMapping("/sign")
-    public boolean sign(User user){
+    @RequestMapping("/sign")
+    public boolean sign(@RequestBody User user){
         boolean b = signService.signSelect(user);
         return b;
+    }
+
+    @RequestMapping("/getCurrUser")
+    User user(HttpServletRequest request){
+        User user = (User) request.getSession().getAttribute("user");
+        System.out.println("-------------当前用户 为 "+user+"-------------");
+        return user;
     }
 }

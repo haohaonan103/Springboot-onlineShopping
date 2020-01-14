@@ -3,31 +3,105 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
-    <form action="/user/login" method="post">
-        <input type="text" id="username" name="userName"/>
-        <input type="password" name="userPassword"/>
-        <input type="submit" value="登录"/>
+<style>
+    input {
+        width: 200px;
+        height: 24px;
+        background: #c0c0c0;
+        border-radius: 5px;
+    }
+    form {
+        width: 350px;
+        border: 2px solid #0e19b1;
+        margin: 150px auto;
+        padding:150px;
+        padding-left: 70px;
+        border-radius: 30px;
+    }
+
+</style>
+<body style="background: url(images/footer-bg.jpg)">
+    <form id="form">
+        <input type="text" id="username" name="userName" placeholder="请输入用户名"/><br/><br/>
+        <input type="password" id="userPassword" placeholder="请输入密码"/><br/><br/>
+        <input type="button" class="btn-primary" value="登录" onclick="login()"/><br/><br/>
+        <input type="button" class="btn-primary" value="注册" @click="show"/><br/><br/>
+        <el-dialog
+                title="用户注册"
+                :visible.sync="vs"
+                width="30%">
+            <div style="height: 100px;padding-top: 20px;padding-left: 110px">
+                <input type="text" id="reusername"  placeholder="请输入用户名"/><br/><br/>
+                <input type="password" id="reuserpassword" placeholder="请输入密码"/><br/><br/>
+
+            </div>
+            <span slot="footer" class="dialog-footer">
+    <el-button @click="vs = false">取 消</el-button>
+    <el-button type="primary" @click="reg">确 定</el-button>
+  </span>
+        </el-dialog>
     </form>
 </body>
 <script src="js/jquery-1.8.3.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="js/index.js"></script>
+<link href="js/index.css" rel="stylesheet">
 <script>
-    // function  denglu() {
-    //     $.ajax({
-    //         type:'Get',
-    //         datatype:'text',
-    //         url:'/user/login',
-    //         data:$("#userform").serializeArray(),
-    //         success : function (data) {
-    //             alert(data);
-    //                 window.location.href="index.html";
-    //             }
-    //     })
-    // }
-    // function zhuce() {
-    //
-    // }
+    function login() {
+        var uname = $("#username").val();
+        var pwd = $("#userPassword").val();
+        var user = {userName:uname,userPassword:pwd};
+        $.ajax({
+            url:"user/login",
+            type:"POST",
+            contentType:'application/json;charset=UTF-8',
+             data:JSON.stringify(user),
+              dataType:"json",
+              success:function(data){
+                if(!data){
+                    v2.$message.error('登陆失败');
+                }else {
+                    window.location.href="index.html";
+                }
+              } });
+    }
+    var v2 = new Vue({
+        el:"#form",
+        data:{
+            vs:false
+        },
+        methods:{
+            show:function () {
+                this.vs=true;
+            },
+            reg:function () {
+                var uname = $("#reusername").val();
+                var pwd = $("#reuserpassword").val();
+                var user = {userName:uname,userPassword:pwd};
+                this.vs=false;
+                $("#reusername").val("")
+                $("#reuserpassword").val("");
+                $.ajax({
+                    url:"user/sign",
+                    type:"POST",
+                    contentType:'application/json;charset=UTF-8',
+                    data:JSON.stringify(user),
+                    dataType:"json",
+                    success:function(data){
+                        if (data){
+                            v2.$message({
+                                message: '恭喜你，注册成功',
+                                type: 'success'
+                            });
+                        }else {
+                            v2.$message.error('注册失败');
+                        }
+                    } });
+            }
+        },
+    });
 
 </script>
 </html>

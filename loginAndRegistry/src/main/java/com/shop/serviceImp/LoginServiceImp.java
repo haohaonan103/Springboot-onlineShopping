@@ -19,6 +19,7 @@ public class LoginServiceImp implements LoginService {
         if(loginselect!=null){
             HttpSession session = request.getSession();
             session.setAttribute("user",loginselect);
+            System.out.println("-------------登录成功 存session-------------");
             return true;
         }else {
             return false;

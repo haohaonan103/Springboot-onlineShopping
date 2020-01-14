@@ -13,6 +13,7 @@
 </head>
 
 <body>
+<div id="aps">
 <!-- Header -->
 <header class="header">
     <div class="top-header">
@@ -24,8 +25,7 @@
                 </div>
                 <div class="col-md-6 col-xs-5">
                     <ul class="list-inline security">
-                        <li title="Login"><i class=" lnr lnr-lock"></i><span class="hidden-xs">Login</span></li>
-                        <li title="Register"><i class=" lnr lnr-pencil"></i><span class="hidden-xs">Register</span></li>
+                        <li title="Login" id="welcome"><i class=" lnr lnr-lock"></i><a href="login.html" class="hidden-xs">Login</a></li>
                     </ul>
                 </div>
             </div>
@@ -33,8 +33,6 @@
     </div>
 
 
-    </div>
-    </div>
 
     <div class="bottom-header bottom-header2">
         <div class="row">
@@ -64,7 +62,7 @@
                             <div class="nav-search">
                                 <form class="navbar-form navbar-right" role="search">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="Search..."><i class="fa fa-search search-btn"></i>
+                                        <input type="text" id="searchKey" class="form-control" placeholder="Search..."><i @click="search" class="fa fa-search search-btn"></i>
                                     </div>
                                 </form>
                             </div>
@@ -109,7 +107,8 @@
 </section>
 
 <!-- Product -->
-<section class="product-list">
+
+<section class="product-list" >
     <div class="grid-product">
         <div class="container">
             <div class="row">
@@ -125,11 +124,7 @@
                             <!-- 类别 -->
                             <div class="panel-body">
                                 <ul class="category-list">
-                                    <li><i class="fa fa-eye side-icon pull-left active"></i>Premium Store <i class="fa fa-angle-right pull-right"></i></li>
-                                    <li><i class="fa fa-eyedropper side-icon pull-left"></i>Premium Store <i class="fa fa-angle-right pull-right"></i></li>
-                                    <li><i class="fa fa-flash side-icon pull-left"></i>Premium Store <i class="fa fa-angle-right pull-right"></i></li>
-                                    <li><i class="fa fa-flask side-icon pull-left"></i>Premium Store <i class="fa fa-angle-right pull-right"></i></li>
-                                    <li><i class="fa fa-fire side-icon pull-left"></i>Premium Store <i class="fa fa-angle-right pull-right"></i></li>
+                                    <li v-for="cate in cates" @click="javascript:changeCates(cate.categoryId);"><i class="fa fa-eye side-icon pull-left active"></i>{{cate.categoryName}}<i class="fa fa-angle-right pull-right"></i></li>
                                 </ul>
                             </div>
                         </div>
@@ -142,18 +137,19 @@
 
 <!--这是一个商品-->
 
-                        <div class="col-md-4 col-sm-6 col-xs-12">
+                        <div class="col-md-4 col-sm-6 col-xs-12"
+                        v-for="goods in goodses">
                             <div class="single-grid">
                                 <div class="grid-img">
                                     <img class="img-resposive" src="images/women2.jpg" alt="women" />
                                     <div class="grid-overlay">
                                         <ul>
-                                            <li style="width: 100px"><a href="detail.html" class="lnr lnr-cart">BUY</a></li>
+                                            <li style="width: 100px"><a @click="javascript:buy(goods.goodsId);" class="lnr lnr-cart">BUY</a></li>
                                         </ul>
                                     </div>
                                 </div>
-                                <h3>Bright Scalet-Shirt  <span>$65</span></h3>
-                                <p>Lorem ipsum dolor sit amet</p>
+                                <h3>{{goods.goodsName}}<span>{{goods.goodsPrice}}</span></h3>
+                                <p>{{goods.categoryName}}</p>
                             </div>
                         </div>
 
@@ -164,7 +160,7 @@
         </div>
     </div>
 </section>
-
+</div>
 <!-- bottom footer -->
 <footer class="bottom-footer">
     <div class="container">
@@ -176,8 +172,56 @@
     </div>
 </footer>
 
+
 <!--======== All Javascript =========-->
 <script src="js/jquery-2.1.1.js"></script>
 <script src="bootstrap/js/bootstrap.min.js"></script>
+<script src="js/vue.js"></script>
+<script src="js/axios.js"></script>
+
+<script>
+    var v1 = new Vue({
+        el:"#aps",
+        data:{
+            cates:[],
+            goodses:[],
+            user:{},
+            key:""
+        },
+        methods:{
+            search:function(){
+                this.key = $("#searchKey").val();
+               axios.post("goods/like",this.key).then(res=>{this.goodses=res.data});
+            },
+            getCates:function () {
+                axios.get("goodscategory/select").then(res=>this.cates=res.data);
+            },
+            getGoods:function () {
+                axios.get("goods/allGoods").then(res=>this.goodses=res.data);
+            },
+            changeCates:function change(id) {
+               axios.get("goods/allByCate/"+id).then(res=>this.goodses=res.data);
+    },
+            buy:function (id) {
+                window.localStorage.setItem("id",id);
+                window.location.href="detail.html";
+            },
+            getCurrUser:function () {
+                axios.get("user/getCurrUser").then(res=>{
+                    if(res.data!=""){
+                        this.user=res.data;
+                        $("#welcome").html("您好,"+res.data.userName);
+                    }
+                });
+            }
+
+        },
+        mounted:function () {
+            this.getCates();
+            this.getGoods();
+            this.getCurrUser();
+        }
+    });
+</script>
 </body>
 </html>

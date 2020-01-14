@@ -10,31 +10,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 @Service
 public class GoodsServiceImpl implements GoodsService {
     @Autowired
     private GoodsMapper goodsMapper;
-    @Autowired
-    private CouponMapper couponMapper;
 
-    /**
-     * 领取优惠券
-     * @param user 用户对象
-     * @param couponId  优惠券id
-     * @return true/false
-     */
-    @Override
-    @Transactional
-    public boolean getCoupon(User user, Long couponId) {
-        Integer coupon = couponMapper.getCoupon(user.getUserId(), couponId);
-        if(coupon<0){
-            System.out.println("领取失败");
-            return false;
-        }
-        return true;
-
-    }
 
 
     /**
@@ -103,5 +85,23 @@ public class GoodsServiceImpl implements GoodsService {
     public Integer deleteGoods(Long id) {
         Integer integer = goodsMapper.deleteGoods(id);
         return integer;
+    }
+    @Override
+    public List<GoodsVo> get4(){
+        return this.getHolder();
+    }
+    private List<GoodsVo> getHolder(){
+        List<GoodsVo> goodsVos = this.listAllGoods();
+        List<GoodsVo> res = new ArrayList<>();
+        int size = goodsVos.size();
+        if(size<=4){
+            return goodsVos;
+        }else {
+            res.add(goodsVos.get((size>>1)+1));
+            res.add(goodsVos.get(size>>1));
+            res.add(goodsVos.get((size>>1)-1));
+            res.add(goodsVos.get((size>>1)+2));
+        }
+        return res;
     }
 }
