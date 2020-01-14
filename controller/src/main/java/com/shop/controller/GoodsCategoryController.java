@@ -26,7 +26,7 @@ public class GoodsCategoryController {
         return integer;
     }
     /**
-     * 新增商品类别
+     * 删除商品类别
      * @param id
      * @return
      */
