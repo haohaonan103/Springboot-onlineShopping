@@ -3,7 +3,9 @@ package com.shop.service;
 import com.shop.model.Goods;
 import com.shop.model.User;
 import com.shop.vo.GoodsVo;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -43,7 +45,7 @@ public interface GoodsService {
      * @param goods
      * @return
      */
-    public Integer putGoods(Goods goods);
+    public boolean putGoods(Goods goods, MultipartFile file, HttpServletRequest request);
 
     /**
      * 商品删除

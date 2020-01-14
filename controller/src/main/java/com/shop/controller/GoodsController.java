@@ -5,7 +5,9 @@ import com.shop.service.GoodsService;
 import com.shop.vo.GoodsVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @RestController
@@ -45,9 +47,8 @@ public class GoodsController {
      * @return
      */
     @GetMapping("/insert")
-    public Integer insertGoods(Goods goods){
-         Integer integer = goodsService.putGoods(goods);
-         return integer;
+    public boolean insertGoods(Goods goods, MultipartFile file, HttpServletRequest request){
+         return goodsService.putGoods(goods,file,request);
      }
 
     /**

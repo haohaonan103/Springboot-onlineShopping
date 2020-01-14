@@ -1,15 +1,21 @@
 package com.shop.serviceImpl;
 
-import com.shop.mapper.CouponMapper;
+
+
+
 import com.shop.mapper.GoodsMapper;
 import com.shop.model.Goods;
-import com.shop.model.User;
+
 import com.shop.service.GoodsService;
+import com.shop.util.FileUtils;
 import com.shop.vo.GoodsVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 @Service
@@ -71,9 +77,12 @@ public class GoodsServiceImpl implements GoodsService {
      * @return
      */
     @Override
-    public Integer putGoods(Goods goods) {
+    @Transactional
+    public boolean putGoods(Goods goods, MultipartFile file, HttpServletRequest request) {
+        String newName = FileUtils.getNewName(file);
+        boolean upload = FileUtils.upload(file, newName, request);
         Integer integer = goodsMapper.putGoods(goods);
-        return integer;
+        return integer==1;
     }
 
     /**
