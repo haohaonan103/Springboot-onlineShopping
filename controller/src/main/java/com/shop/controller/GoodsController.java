@@ -46,8 +46,10 @@ public class GoodsController {
      * @param goods
      * @return
      */
-    @GetMapping("/insert")
-    public boolean insertGoods(Goods goods, MultipartFile file, HttpServletRequest request){
+    @RequestMapping("/insert")
+    public boolean insertGoods(@RequestParam("goodsVo") GoodsVo goods, MultipartFile file, HttpServletRequest request){
+        String goodsVo = request.getParameter("goodsVo");
+        System.out.println(goodsVo);
          return goodsService.putGoods(goods,file,request);
      }
 

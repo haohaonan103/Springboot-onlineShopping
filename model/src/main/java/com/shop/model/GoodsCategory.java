@@ -8,7 +8,6 @@ import lombok.ToString;
  * 商品类别实体类
  */
 @Data
-@Builder
 @ToString
 public class GoodsCategory {
     //categoryId

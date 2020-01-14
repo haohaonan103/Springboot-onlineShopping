@@ -130,11 +130,11 @@
                                         :visible.sync="catevs"
                                         width="30%">
                                     <div>
-
+                                        商品类别:<input id="in1">
                                     </div>
                                     <span slot="footer" class="dialog-footer">
                 <el-button @click="catevs = false">取 消</el-button>
-                <el-button type="primary" @click="addCate">确 定</el-button>
+                <el-button type="primary" @click="sureAddCate">确 定</el-button>
               </span>
                                 </el-dialog>
                                 <button @click="addGoods">添加商品</button>
@@ -142,9 +142,20 @@
                                         title="添加商品"
                                         :visible.sync="goodsvs"
                                         width="30%">
+                                    <div>
+                                        商品名称:<input id="goodsName" v-model="goods.goodsName" ><br/>
+                                        商品价格:<input id="goodsPrice" v-model="goods.goodsPrice" ><br/>
+                                        商品数量:<input id="goodsCount" v-model="goods.goodsCount" ><br/>
+                                        商品图片:<input type="file" id="file"><br/>
+                                        商品类别:<select v-model="goods.categoryId">
+                                        <option v-for="cate in cates"
+                                                :label="cate.categoryName"
+                                                :value="cate.categoryId">{{cate.categoryName}}</option>
+                                    </select>
+                                    </div>
                                     <span slot="footer" class="dialog-footer">
                 <el-button @click="goodsvs = false">取 消</el-button>
-                <el-button type="primary" @click="addCate">确 定</el-button>
+                <el-button type="primary" @click="sureAddGoods">确 定</el-button>
               </span>
                                 </el-dialog>
                                 <ul class="category-list">
@@ -212,7 +223,9 @@
             goodses:[],
             user:{},
             catevs:false,
-            goodsvs:false
+            goodsvs:false,
+           cate:{},
+           goods:{}
 
         },
         methods:{
@@ -221,6 +234,42 @@
             },
             addGoods:function(){
                 this.goodsvs=true;
+            },
+            sureAddCate:function(){
+                this.cate.categoryName = $("#in1").val();
+                this.catevs=false;
+                axios.post("goodscategory/insert",this.cate).then(res=>{
+                    if(res.data){
+                        this.$message({
+                            message:'添加成功',
+                            type:'success'
+                        })
+                    }else {
+                        this.$message({
+                            message:'添加失败',
+                            type:'error'
+                        })
+                    };
+                    this.getCates();
+                });
+                this.cate={};
+                $("#in1").val("");
+
+            },
+            sureAddGoods:function(){
+                var formData = new window.FormData();
+                formData.append("file",document.querySelector('input[type=file]').files[0]);
+                formData.append("goodsVo",this.goods);
+                var options = {  // 设置axios的参数
+                    url: 'goods/insert',
+                    data: formData,
+                    method: 'post',
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                }
+                //axios(options).then((res) => {}) // 发送请求
+                console.log(this.goods);
             },
             search:function(){
                 var key = $("#searchKey").val();

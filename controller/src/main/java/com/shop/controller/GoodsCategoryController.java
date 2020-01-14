@@ -4,9 +4,11 @@ import com.shop.model.GoodsCategory;
 import com.shop.service.GoodsCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.PostConstruct;
 import java.util.List;
 
 @RestController
@@ -20,10 +22,10 @@ public class GoodsCategoryController {
      * @param goodsCategory
      * @return
      */
-    @GetMapping("/insert")
-    public Integer insertCategory(GoodsCategory goodsCategory){
+    @RequestMapping("/insert")
+    public boolean insertCategory(@RequestBody GoodsCategory goodsCategory){
         Integer integer = goodsCategoryService.putCategory(goodsCategory);
-        return integer;
+        return integer==1;
     }
     /**
      * 删除商品类别
