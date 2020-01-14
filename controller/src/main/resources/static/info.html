@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/linearicons.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/responsive.css" rel="stylesheet">
+    <style>
+        #box{
+            background-image: url("images/2.png") ;
+            background-repeat: no-repeat;
+            height: 300px;
+            width: 100%;
+        }
+        #if{
+            height: 800px;
+            width: 100%;
+        }
+        #iframe{
+            height: 100%;
+            width: 100%;
+        }
+        #ls{
+            margin-left: 500px;
+        }
+        #xg{
+            margin-left: 500px;
+        }
+
+    </style>
+</head>
+<body >
+<div id="app">
+<div id="box">
+    <h1 id="user"></h1>
+</div>
+<div>
+    <button id="ls" @click="javascript:lishi(user.userId);">历史订单</button>
+    <button id="xg">修改密码</button>
+</div>
+<div id="if">
+    {{order.goodsName}}
+    <iframe id="iframe" ></iframe>
+</div>
+
+</div>
+</body>
+<script src="js/jquery-2.1.1.js"></script>
+<script src="js/axios.js"></script>
+<script src="bootstrap/js/bootstrap.min.js"></script>
+<script src="js/vue.js"></script>
+<script src="js/index.js"></script>
+<link rel="stylesheet" href="js/index.css">
+
+<script>
+
+    var vue = new Vue({
+        el:"#app",
+        data:{
+            coupons:[],
+            hots:[],
+            user:{},
+            coupon:{},
+            orders:{},
+            order:{}
+        },
+        methods:{
+            getCurrUser:function () {
+                axios.get("user/getCurrUser").then(res=>{
+                    if(res.data!=""){
+                        this.user=res.data;
+                        $("#user").html("您好,"+res.data.userName);
+                    }
+                });
+            },
+            lishi:function (id) {
+                this.user.userId=id;
+                alert("aaaa");
+                axios.post("order/select",this.user.userId).then(res=>{
+                    if(res.data!=""){
+                        this.orders=res.data;
+                        alert(res.data.order);
+                        // for (var a=0;a<this.orders.size();a++){
+                        //     $("#box2 tbody").append("<tr><td>"+a.goodsName+"</td></tr>")
+                        // }
+                    }
+                });
+            }
+        },
+        mounted:function () {
+            this.getCurrUser();
+        }
+    });
+</script>
+</html>

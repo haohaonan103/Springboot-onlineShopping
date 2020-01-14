@@ -10,7 +10,6 @@ import java.util.Date;
  * 订单实体类
  */
 @Data
-@Builder
 @ToString
 public class Order {
     //orderId
@@ -19,6 +18,8 @@ public class Order {
     private Long userId;
     //商品id
     private Long goodsId;
+    //商品名称
+    private String goodsName;
     //商品数量
     public Long GoodsNum;
     //优惠券id
