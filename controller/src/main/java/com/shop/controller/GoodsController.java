@@ -24,7 +24,7 @@ public class GoodsController {
      * 查询所有的商品
      * @return
      */
-    @GetMapping("/allGoods")
+    @GetMapping(value ={"/allGoods","/like"})
     public List<GoodsVo> getAllGoodsVo(){
         return goodsService.listAllGoods();
     }
@@ -70,9 +70,8 @@ public class GoodsController {
          return goodsService.get4();
      };
 
-     @RequestMapping("/like")
-    List<GoodsVo> getLike(@RequestBody String  key){
-         System.out.println(key);
+     @RequestMapping("/like/{key}")
+    List<GoodsVo> getLike(@PathVariable String  key){
          return goodsService.getLike(key);
      }
 }

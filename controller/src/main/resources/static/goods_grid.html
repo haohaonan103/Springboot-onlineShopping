@@ -186,12 +186,11 @@
             cates:[],
             goodses:[],
             user:{},
-            key:""
         },
         methods:{
             search:function(){
-                this.key = $("#searchKey").val();
-               axios.post("goods/like",this.key).then(res=>{this.goodses=res.data});
+                var key = $("#searchKey").val();
+               axios.get("goods/like/"+key).then(res=>{this.goodses=res.data});
             },
             getCates:function () {
                 axios.get("goodscategory/select").then(res=>this.cates=res.data);
