@@ -59,7 +59,7 @@ public interface GoodsMapper {
      * @param goods
      * @return
      */
-    @Insert("insert into goods(goodsName,goodsPrice,goodsPic,goodsStatic,goodsCateId,goodsCount) value(#{goodsName},#{goodsPrice},#{goodsPic},#{goodsStatic},#{goodsCateId},#{goodsCount})")
+    @Insert("insert into goods(goodsName,goodsPrice,goodsPic,goodsStatus,goodsCateId,goodsCount) value(#{goodsName},#{goodsPrice},#{goodsPic},#{goodsStatus},#{goodsCateId},#{goodsCount})")
     public Integer putGoods(Goods goods);
 
     /**

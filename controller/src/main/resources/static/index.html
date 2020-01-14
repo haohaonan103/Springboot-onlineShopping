@@ -12,6 +12,7 @@
     <link href="css/linearicons.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
     <link href="css/responsive.css" rel="stylesheet">
+    <link href="js/index.css" rel="stylesheet">
 </head>
 
 
@@ -119,7 +120,7 @@
                 v-for="hot in hots">
                     <div class="single-grid">
                         <div class="grid-img">
-                            <img class="img-resposive" src="images/women1.jpg" :alt=hot.categoryName />
+                            <img class="img-resposive" :src="hot.goodsPic" :alt=hot.categoryName />
                             <div class="grid-overlay">
                                 <ul>
                                     <li style="width: 100px"><a @click="javascript:buy(hot.goodsId);" class="lnr lnr-cart">BUY</a></li>
@@ -153,7 +154,6 @@
 <script src="bootstrap/js/bootstrap.min.js"></script>
 <script src="js/vue.js"></script>
 <script src="js/index.js"></script>
-<link rel="stylesheet" href="js/index.css">
 
 <script>
     var vue = new Vue({
@@ -174,6 +174,7 @@
             },
             getHots:function () {
                 axios.get("goods/get4").then(res=>this.hots=res.data);
+                console.log(res.data);
             },
             getCurrUser:function () {
                 axios.get("user/getCurrUser").then(res=>{

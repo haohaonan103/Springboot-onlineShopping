@@ -176,7 +176,7 @@
                         v-for="goods in goodses">
                             <div class="single-grid">
                                 <div class="grid-img">
-                                    <img class="img-resposive" src="images/women2.jpg" alt="women" />
+                                    <img class="img-resposive" :src="goods.goodsPic" alt="women" />
                                     <div class="grid-overlay">
                                         <ul>
                                             <li style="width: 100px"><a @click="javascript:buy(goods.goodsId);" class="lnr lnr-cart">BUY</a></li>
@@ -259,7 +259,10 @@
             sureAddGoods:function(){
                 var formData = new window.FormData();
                 formData.append("file",document.querySelector('input[type=file]').files[0]);
-                formData.append("goodsVo",this.goods);
+                formData.append("goodsName",this.goods.goodsName);
+                formData.append("goodsPrice",this.goods.goodsPrice);
+                formData.append("goodsCount",this.goods.goodsCount);
+                formData.append("categoryId",this.goods.categoryId);
                 var options = {  // 设置axios的参数
                     url: 'goods/insert',
                     data: formData,
@@ -268,8 +271,7 @@
                         'Content-Type': 'multipart/form-data'
                     }
                 }
-                //axios(options).then((res) => {}) // 发送请求
-                console.log(this.goods);
+                axios(options).then((res) => {}) // 发送请求
             },
             search:function(){
                 var key = $("#searchKey").val();

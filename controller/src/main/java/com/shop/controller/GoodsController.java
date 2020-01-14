@@ -4,8 +4,10 @@ import com.shop.model.Goods;
 import com.shop.service.GoodsService;
 import com.shop.vo.GoodsVo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -43,14 +45,21 @@ public class GoodsController {
 
     /**
      * 商品新增
-     * @param goods
+     * @param
      * @return
      */
     @RequestMapping("/insert")
-    public boolean insertGoods(@RequestParam("goodsVo") GoodsVo goods, MultipartFile file, HttpServletRequest request){
-        String goodsVo = request.getParameter("goodsVo");
-        System.out.println(goodsVo);
-         return goodsService.putGoods(goods,file,request);
+    public boolean insertGoods(@RequestParam("goodsName") String goodsName,
+                               @RequestParam("goodsPrice") String goodsPrice,
+                               @RequestParam("goodsCount") String goodsCount,
+                               @RequestParam("categoryId") String categoryId,
+                               @RequestParam("file") MultipartFile file, HttpServletRequest request){
+        GoodsVo goodsVo = new GoodsVo();
+        goodsVo.setGoodsCount(Integer.parseInt(goodsCount));
+        goodsVo.setGoodsPrice(Double.parseDouble(goodsPrice));goodsVo.setGoodsName(goodsName);goodsVo.setGoodsStatus(1);
+        goodsVo.setGoodsCateId(Long.parseLong(categoryId));
+        boolean b = goodsService.putGoods(goodsVo, file, request);
+        return b;
      }
 
     /**

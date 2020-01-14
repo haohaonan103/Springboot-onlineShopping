@@ -80,6 +80,7 @@ public class GoodsServiceImpl implements GoodsService {
     @Transactional
     public boolean putGoods(Goods goods, MultipartFile file, HttpServletRequest request) {
         String newName = FileUtils.getNewName(file);
+        goods.setGoodsPic(newName);
         boolean upload = FileUtils.upload(file, newName, request);
         Integer integer = goodsMapper.putGoods(goods);
         return integer==1;
