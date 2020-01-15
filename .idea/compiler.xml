@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="loginAndRegistry" />
+        <module name="order" />
+        <module name="model" />
+        <module name="goods" />
+        <module name="controller" />
+        <module name="info" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="controller" target="1.8" />
+      <module name="goods" target="1.8" />
+      <module name="info" target="1.8" />
+      <module name="loginAndRegistry" target="1.8" />
+      <module name="model" target="1.8" />
+      <module name="order" target="1.8" />
+      <module name="springboot-onlineShopping" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

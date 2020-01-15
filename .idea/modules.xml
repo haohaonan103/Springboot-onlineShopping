@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/controller/controller.iml" filepath="$PROJECT_DIR$/controller/controller.iml" />
+      <module fileurl="file://$PROJECT_DIR$/goods/goods.iml" filepath="$PROJECT_DIR$/goods/goods.iml" />
+      <module fileurl="file://$PROJECT_DIR$/info/info.iml" filepath="$PROJECT_DIR$/info/info.iml" />
+      <module fileurl="file://$PROJECT_DIR$/loginAndRegistry/loginAndRegistry.iml" filepath="$PROJECT_DIR$/loginAndRegistry/loginAndRegistry.iml" />
+      <module fileurl="file://$PROJECT_DIR$/model/model.iml" filepath="$PROJECT_DIR$/model/model.iml" />
+      <module fileurl="file://$PROJECT_DIR$/order/order.iml" filepath="$PROJECT_DIR$/order/order.iml" />
+      <module fileurl="file://$PROJECT_DIR$/springboot-onlineShopping.iml" filepath="$PROJECT_DIR$/springboot-onlineShopping.iml" />
+    </modules>
+  </component>
+</project>

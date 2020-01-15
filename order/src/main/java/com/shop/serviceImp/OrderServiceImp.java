@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class OrderServiceImp implements OrderService {
@@ -77,5 +78,11 @@ public class OrderServiceImp implements OrderService {
             return false;
         }
 
+    }
+
+    @Override
+    public List<Order> selectOrder(Long id) {
+        List<Order> orders = orderMapper.selectOrder(id);
+        return orders;
     }
 }
