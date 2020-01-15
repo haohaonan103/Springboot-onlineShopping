@@ -38,12 +38,11 @@
     <h1 id="user"></h1>
 </div>
 <div>
-    <button id="ls" @click="javascript:lishi(user.userId);">历史订单</button>
+    <a id="ls" href="lishi.html" target="im" onclick="lishi(1)" @click="javascript:lishi(1)">历史订单</a>
     <button id="xg">修改密码</button>
 </div>
 <div id="if">
-    {{order.goodsName}}
-    <iframe id="iframe" ></iframe>
+    <iframe id="iframe" name="im" src="" frameborder="0"></iframe>
 </div>
 
 </div>
@@ -56,6 +55,17 @@
 <link rel="stylesheet" href="js/index.css">
 
 <script>
+    $(function () {
+
+    })
+    function lishi(id) {
+        alert(id);
+        $.post("order/select"+id,{},function (data) {
+            for(var i = 0 ; i<data.length;i++){
+                $("#box2").append("<tr><td>1</td><td>2</td><td>3</td><td>4</td><td></td></tr>");
+            }
+        },"json")
+    }
 
     var vue = new Vue({
         el:"#app",
