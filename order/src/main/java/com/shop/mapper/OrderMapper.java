@@ -14,7 +14,7 @@ public interface OrderMapper {
      * @param order
      * @return
      */
-    @Insert("insert into order(userId,goodsId,GoodsNum,orderTotal,orderTotalActual,orderTime) values(#{userId}," +
+    @Insert("insert into `order` (couponId,userId,goodsId,GoodsNum,orderTotal,orderTotalActual,orderTime) values (#{couponId},#{userId}," +
             "#{goodsId},#{GoodsNum},#{orderTotal},#{orderTotalActual},#{orderTime})")
     public boolean putOrder(Order order);
 

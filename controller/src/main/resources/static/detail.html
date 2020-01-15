@@ -24,7 +24,7 @@
                 </div>
                 <div class="col-md-6 col-xs-5">
                     <ul class="list-inline security">
-                        <li title="Login" id="welcome"><i class=" lnr lnr-lock"></i><span class="hidden-xs">Login</span></li>
+                        <li title="Login" id="welcome"><i class=" lnr lnr-lock"></i><a href="login.html" class="hidden-xs">Login</a></li>
 
                     </ul>
                 </div>
@@ -108,19 +108,26 @@
         <div class="row">
             <div class="col-md-4 col-sm-6 col-xs-12">
                 <div class="single-product-img">
-                    <img class="img-responsive" src="images/single-product.jpg" alt="" />
+                    <img class="img-responsive" :src="goods.goodsPic" :alt="goods.goodsCategory" />
                 </div>
             </div>
             <div class="col-md-6 col-sm-6 col-xs-12">
                 <div class="single-product-detail">
 
-                    <h3>{{goods.goodsName}}</h3>
+                    <h3>商品名称:{{goods.goodsName}}</h3>
 
-                    <p v-for="coupon in coupons">优惠券</p>
+                    优惠券:
+                    <select id="select">
+                        <option v-for="coupon in coupons"
+                                :value="coupon.couponId"
+                        >{{coupon.couponName}}</option>
+                    </select>
 
-                    <div class="price">￥{{goods.goodsPrice}}</div>
-                    <div class="order-tag">{{goods.categoryName}}</div>
-                    <div class="add-cart"><button class="btn btn-default">
+                   <div class="price">价格: ￥{{goods.goodsPrice}}</div>
+                    <div class="order-tag">分类:{{goods.categoryName}}</div>
+                    <div class="order-tag">库存:{{goods.goodsCount}}件</div>
+                    购买数量:<input placeholder="购买数量" id="num">
+                    <div class="add-cart"><button class="btn btn-default" @click="getit">
                         <i class="lnr lnr-cart"></i>GET IT</button></div>
                 </div>
             </div>
@@ -150,7 +157,8 @@
         el:"#app",
         data:{
             goods:{},
-            coupons:[]
+            coupons:[],
+            order:{}
 
         },
         methods:{
@@ -158,7 +166,9 @@
                 axios.get("goods/"+id).then(res=>this.goods=res.data);
             },
             getCoupons:function () {
-                axios.get("/coupon/getByUser").then(res=>this.coupons=res.data);
+                axios.get("/coupon/getByUser").then(res=>{
+                        this.coupons=res.data
+                });
             },
             getCurrUser:function () {
                 axios.get("user/getCurrUser").then(res=>{
@@ -167,6 +177,18 @@
                         $("#welcome").html("您好,"+res.data.userName);
                     }
                 });
+            },
+            getit:function () {
+                this.order.goodsId=this.goods.goodsId;
+                this.order.couponId=$("#select").val();
+                this.order.goodsNum = $("#num").val();
+               axios.post("order/create",this.order).then(res=>{
+                  if(res.data){
+                      alert("付款成功");
+                  }else {
+                      alert("付款失败");
+                  }
+               });
             }
         },
         mounted:function () {

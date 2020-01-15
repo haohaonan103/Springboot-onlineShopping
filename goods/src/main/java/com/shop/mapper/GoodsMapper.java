@@ -52,7 +52,7 @@ public interface GoodsMapper {
      * @return
      */
     @Update("update goods set goodsCount=#{amount} where goodsId=#{goodsId}")
-    public Integer updateGoods(int amount,Long goodsId);
+    public Integer updateGoods(@Param(value = "amount") int amount,@Param(value = "goodsId") Long goodsId);
 
     /**
      * 商品新增

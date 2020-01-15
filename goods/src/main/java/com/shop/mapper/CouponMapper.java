@@ -18,7 +18,7 @@ public interface CouponMapper {
     @Select("select * from coupon where couponId = #{couponId}")
     Coupon getById(Long couponId);
 
-    @Select("select * from user_coupon uc left join coupon c on uc.userId = #{userId}")
+    @Select("select DISTINCT c.* from user_coupon uc left join coupon c on uc.userId = #{userId}")
     List<Coupon> getByUserId(Long userId);
 
     @Select("select * from coupon")
